@@ -11,7 +11,7 @@ NOTE: best to do this on a stock ubuntu 16.04 VM as your Ansible controller else
 ## Step 2: clone quantastor ansible module git repository
 
     cd /path/to/dir
-    git clone https://github.com/cagamps/qs_ansible_modules.git
+    git clone https://github.com/cagamps/qsansible.git
 
 ## Step 3: tell ansible about one of your quantastor test boxes by editing /etc/ansible/hosts and adding a section like shown below:
 
@@ -27,14 +27,14 @@ replace above IP with the IP of your QuantaStor appliance or one within a grid a
 
 ## Step 3: copy the QuantaStor ansible module files into place, here I'm using a symbolic link to the source code in my git checkout rather than copying the content NOTE: installation location for 'qs_client.py' may differ on your system.
 
-    cd /path/to/dir/qs_ansible_modules
-    ln -s /path/to/dir/qs_ansible_modules/quantastor.py /usr/local/lib/python3.6/dist-packages/ansible/module_utils/.
+    cd /path/to/dir/qsansible
+    ln -s /path/to/dir/qsansible/quantastor.py /usr/local/lib/python3.6/dist-packages/ansible/module_utils/.
     ln -s /usr/local/lib/python3.6/dist-packages/quantastor/qs_client.py /usr/local/lib/python3.6/dist-packages/ansible/module_utils/.
-    ln -s /path/to/dir/qs_ansible_modules/quantastor/ /usr/local/lib/python3.6/dist-packages/ansible/modules/storage/
+    ln -s /path/to/dir/qsansible/quantastor/ /usr/local/lib/python3.6/dist-packages/ansible/modules/storage/
 
 ## Step 4: run a playbook to test the module
 
-You can find example playbooks in the `/path/to/dir/qs_ansible_modules/playbooks/` location. If you are in the root of the git repo you can run the following commands:
+You can find example playbooks in the `/path/to/dir/qsansible/playbooks/` location. If you are in the root of the git repo you can run the following commands:
 
     cd playbooks/
     ansible-playbook qstest_addhost.yml -vvv
@@ -62,7 +62,7 @@ Before running this playbook, you should at least follow steps 1 - 3 in the sect
 
 ## Step 3: Navigate to the playbook directory. 
 
-Playbooks can be found in the qs_ansible_modules git repository `./path/to/dir/qs_ansible_modules/playbooks/`
+Playbooks can be found in the qsansible git repository `./path/to/dir/qsansible/playbooks/`
 
 ## Step 4: Now you have all of the prerequisits neeeded. Run the playbook in verbose mode using the following command:
 
