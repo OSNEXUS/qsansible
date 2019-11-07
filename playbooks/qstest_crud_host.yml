@@ -1,0 +1,35 @@
+- name: test adding Host and Initiator entry
+  connection: local
+  hosts: qsservers
+  tasks:
+
+  - name: remove host "foo"
+    quantastor_host:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      host: 'foo'
+      state: 'absent'
+
+  - name: Make sure that the host "foo" is present, and if not add it
+    quantastor_host:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      host: 'foo'
+      initiators: 'iqn.foo'
+
+  - name: verify host "foo"
+    quantastor_host:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      host: 'foo'
+
+  - name: assign volume "dbvolume" to host "foo"
+    quantastor_host:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      host: 'foo'
+      volume: 'dbvolume'
+
+  - name: assign volume "dbvolume" to host "foo"
+    quantastor_host:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      host: 'foo'
+      volume: 'dbvolume'
+
+

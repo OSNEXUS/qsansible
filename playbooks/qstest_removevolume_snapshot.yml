@@ -1,0 +1,11 @@
+- name: removing storage volume snapshots
+  connection: local
+  hosts: qsservers
+  tasks:
+
+  - name: delete 'testVol' and all children snapshots
+    quantastor_volume:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      volume: 'testVol'
+      deleteChildren: 'true'
+      state: 'absent'

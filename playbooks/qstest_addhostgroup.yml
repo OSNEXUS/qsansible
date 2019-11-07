@@ -1,0 +1,55 @@
+- name: test adding and removing Host Group entries
+  connection: local
+  hosts: qsservers
+  tasks:
+
+  - name: remove Host Group "foogroup" if present
+    quantastor_host:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      hostgroup: 'foogroup'
+      state: 'absent'
+
+  - name: create Host "foo2" if not present
+    quantastor_host:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      host: 'foo2'
+      initiators: 
+        - 'iqn.foo2'
+        - 'iqn.foo2.1'
+        - 'iqn.foo2.2'
+
+  - name: create Host "foo3" if not present
+    quantastor_host:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      host: 'foo3'
+      initiators: 
+        - 'iqn.foo3'
+
+  - name: create Host "foo4" if not present
+    quantastor_host:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      host: 'foo4'
+      initiators: 
+        - 'iqn.foo4'
+
+  - name: create Host Group "foogroup" consisting of Hosts "foo2, foo3, foo4"
+    quantastor_host:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      hostgroup: 'foogroup'
+      hosts: 
+        - 'foo2' 
+        - 'foo3' 
+        - 'foo4' 
+
+  - name: assign Storage Volume "dbvolume" to Host Group "foogroup"
+    quantastor_host:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      hostgroup: 'foogroup'
+      volume: 'dbvolume'
+
+  - name: unassign Storage Volume "dbvolume" from Host Group "foogroup"
+    quantastor_host:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      hostgroup: 'foogroup'
+      volume: 'dbvolume'
+      state: 'absent'

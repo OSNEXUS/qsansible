@@ -1,0 +1,34 @@
+- name: test adding and removing network shares
+  connection: local
+  hosts: qsservers
+  tasks:
+
+  - name: Remove a network share shA
+    quantastor_share:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      share: 'shA'
+      state: 'absent'
+
+  - name: Remove a network share shB
+    quantastor_share:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      share: 'shB'
+      state: 'absent'
+
+  - name: Remove a network share shC
+    quantastor_share:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      share: 'shC'
+      state: 'absent'
+
+  - name: Remove a network share shD
+    quantastor_share:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      share: 'shD'
+      state: 'absent'
+
+  - name: Remove a network share shE
+    quantastor_share:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      share: 'shE'
+      state: 'absent'

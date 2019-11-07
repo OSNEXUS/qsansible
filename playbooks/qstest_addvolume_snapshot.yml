@@ -1,0 +1,28 @@
+- name: test adding and removing storage volume snapshots
+  connection: local
+  hosts: qsservers
+  tasks:
+
+  - name: Create a storage volume testVol
+    quantastor_volume:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      volume: 'testVol'
+      size: '1000'
+      pool: 'DefaultPool'
+
+  - name: create a storage volume snapshot snap1 of testVol
+    quantastor_volume:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      parent: 'testVol'
+      volumeType: 'snapshot'
+      volume: 'snap1'
+      description: 'snap1-desc'
+      accessMode: '0'
+      count: '1'
+      flags: '0'
+
+  - name: create an unamed storage volume snapshot of testVol
+    quantastor_volume:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      parent: 'testVol'
+      volumeType: 'snapshot'

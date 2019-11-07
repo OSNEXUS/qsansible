@@ -1,0 +1,52 @@
+- name: test adding and removing network shares
+  connection: local
+  hosts: qsservers
+  tasks:
+
+  - name: Create a network share shA
+    quantastor_share:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      share: 'shA'
+      quota: '5TB'
+      recordSizeKb: '256'
+      publicNFS: 'True'
+      publicSMB: 'True'
+      pool: 'DefaultPool'
+      description: 'desc-shA'
+
+  - name: Create a network share shB
+    quantastor_share:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      share: 'shB'
+      ownerUser: 'admin'
+      ownerGroup: 'testGroup'
+      permissions: 'r--r--r--'
+      publicNFS: 'True'
+      publicSMB: 'True'
+      pool: 'DefaultPool'
+      description: 'desc-shB'
+
+  - name: Create a network share shC
+    quantastor_share:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      share: 'shC'
+      publicNFS: 'True'
+      publicSMB: 'False'
+      pool: 'DefaultPool'
+      description: 'desc-shC'
+  
+  - name: Create a network share shD
+    quantastor_share:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      share: 'shD'
+      pool: 'DefaultPool'
+      description: 'desc-shD'
+
+  - name: Create a network share shE
+    quantastor_share:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      share: 'shE'
+      publicNFS: 'False'
+      publicSMB: 'False'
+      pool: 'DefaultPool'
+      description: 'desc-shE'

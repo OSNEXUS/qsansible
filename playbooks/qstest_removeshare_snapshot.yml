@@ -1,0 +1,11 @@
+- name: test adding and removing network share snapshots
+  connection: local
+  hosts: qsservers
+  tasks:
+
+  - name: Delete share 'testShare' and all snapshot children
+    quantastor_share:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      share: 'testShare'
+      deleteChildren: 'True'
+      state: 'absent'

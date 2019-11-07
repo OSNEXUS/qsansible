@@ -1,0 +1,34 @@
+- name: test adding and removing network shares
+  connection: local
+  hosts: qsservers
+  tasks:
+
+
+  - name: delete testShare if it exists
+    quantastor_share:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      deleteChildren: 'True'
+      share: 'testShare'
+      state: 'absent'
+
+  - name: Create a network share testShare
+    quantastor_share:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      share: 'testShare'
+      ownerUser: 'admin'
+      ownerGroup: 'testGroup'
+      quota: '1024KiB'
+      recordSizeKb: '256'
+      publicNFS: 'True'
+      publicSMB: 'True'
+      permissions: 'rwxr-xr--'
+      smbOptionList: 'browseable=yes,public=no,writable=yes'
+      userAccessList: 'admin:valid,@testGroup:valid'
+      syncPolicy: 'always'
+      compressionType: 'gzip'
+      copies: '2'
+      disableSnapBrowsing: 'True'
+      quotaExcludeSnapshots: 'False'
+      reservedSpace: '10GB'
+      pool: 'DefaultPool'
+      description: 'desc-shA'

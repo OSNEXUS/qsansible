@@ -1,0 +1,25 @@
+- name: test assign Volume to Host
+  connection: local
+  hosts: qsservers
+  tasks:
+
+  - name: assign volume "dbvolume" to host "foo"
+    quantastor_host:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      host: 'foo'
+      volume: 'dbvolume'
+
+  - name: assign volume "dbvolume" to host "foo"
+    quantastor_host:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      host: 'foo'
+      volume: 'dbvolume'
+
+  - name: unassign volume "dbvolume" from host "foo"
+    quantastor_host:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      host: 'foo'
+      volume: 'dbvolume'
+      state: 'absent'
+
+

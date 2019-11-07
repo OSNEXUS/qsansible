@@ -1,0 +1,24 @@
+- name: test adding and removing Host entries
+  connection: local
+  hosts: qsservers
+
+  tasks:
+  - name: remove Host "foo" if present on {{ inventory_hostname }} using default username and password 'admin' / 'password' or env vars QS_USERNAME and QS_PASSWORD if present
+    quantastor_host:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      host: 'foo'
+      state: 'absent'
+
+  - name: create Host "foo" on {{ inventory_hostname }} using a username and password from vars in /etc/ansible/hosts
+    quantastor_host:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      quantastor_password: "{{ qs_password }}"
+      quantastor_username: "{{ qs_username }}"
+      host: 'foo'
+      initiators: 'iqn.foo'
+
+  - name: verify Host "foo" on {{ inventory_hostname }}
+    quantastor_host:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      host: 'foo'
+

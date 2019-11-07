@@ -1,0 +1,44 @@
+- name: test adding and removing network share subshares/alias
+  connection: local
+  hosts: qsservers
+  tasks:
+
+  - name: Create a network share testShare
+    quantastor_share:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      share: 'testShare'
+      pool: 'DefaultPool'
+
+  - name: Create an alias for testShare called testAlias
+    quantastor_share:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      parent: 'testShare'
+      share: 'testAlias'
+      shareType: 'alias'
+
+  - name: Create a subshare for testShare called testSub
+    quantastor_share:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      parent: 'testShare'
+      share: 'testSub'
+      shareType: 'alias'
+      subPath: '/sandbox/'
+
+  - name: Remove subshare testSub
+    quantastor_share:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      share: 'testSub'
+      state: 'absent'
+
+  - name: Remove subshare testAlias
+    quantastor_share:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      share: 'testAlias'
+      state: 'absent'
+
+  - name: Remove testShare if it exists
+    quantastor_share:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      share: 'testShare'
+      deleteChildren: 'True'
+      state: 'absent'

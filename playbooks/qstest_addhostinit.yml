@@ -1,0 +1,27 @@
+- name: test adding and removing Host entries
+  connection: local
+  hosts: qsservers
+  tasks:
+
+  - name: Make sure that the host "foo2" is present, and if not add it
+    quantastor_host:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      host: 'foo2'
+      initiators: 
+        - 'iqn.foo2'
+        - 'iqn.foo2.1'
+        - 'iqn.foo2.2'
+
+  - name: remove iqn from "foo2"
+    quantastor_host:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      host: 'foo2'
+      state: 'absent'
+      initiators: 
+        - 'iqn.foo2.2'
+
+  - name: add iqn to "foo2"
+    quantastor_host:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      host: 'foo2'
+      initiators: 'iqn.foo2.3'

@@ -1,0 +1,13 @@
+- name: test adding and removing Host entries
+  connection: local
+  hosts: qsservers
+  tasks:
+
+  - name: Create a volume volA that is 10MB in size
+    quantastor_volume:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      volume: 'testVol'
+      size: '10MB'
+      pool: 'DefaultPool'
+      description: 'desc-volA'
+

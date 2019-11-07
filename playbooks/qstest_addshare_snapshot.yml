@@ -1,0 +1,27 @@
+- name: test adding and removing network share snapshots
+  connection: local
+  hosts: qsservers
+  tasks:
+
+  - name: Create a network share testShare
+    quantastor_share:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      share: 'testShare'
+      pool: 'DefaultPool'
+      disableSnapBrowsing: 'False'
+
+  - name: Create a network share snapshot snap1 of testShare
+    quantastor_share:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      parent: 'testShare'
+      share: 'snap1'
+      description: 'snap1-desc'
+      isActive: 'True'
+      flags: '0'
+      shareType: 'snapshot'
+
+  - name: Create an unamed networkshare snapshot of testShare
+    quantastor_share:
+      quantastor_hostname: "{{ inventory_hostname }}"
+      parent: 'testShare'
+      shareType: 'snapshot'
