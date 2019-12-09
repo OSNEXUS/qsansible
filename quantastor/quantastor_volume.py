@@ -169,7 +169,7 @@ def main():
     if not module.params['parent']:
         if not volumeType == 'normal':
             # all non-'normal' volume types require 'parent' parameter.
-            module.fail_json(msg="To create a '%s', 'parent' parameter must be specified." % (module.params['volumeType']))
+            module.fail_json(msg="To create a '%s', the 'parent' parameter must be specified." % (module.params['volumeType']))
 
     if volumeType == 'normal':
         if not module.params['size'] and not state == 'absent':
@@ -180,7 +180,7 @@ def main():
             client.storage_volume_get(storageVolume=module.params['parent'])
         except Exception as e:
             # all non-'normal' volume types require a vaild parent object
-            module.fail_json(msg="To create a '%s', 'parent' parameter must be a valid storage volume." % (module.params['volumeType']))
+            module.fail_json(msg="To create a '%s', the 'parent' parameter must be a valid storage volume." % (module.params['volumeType']))
 
     
     # For create operations:
@@ -188,12 +188,12 @@ def main():
         # normal volumes require the 'pool' parameter to be a valid storage pool.
         if not module.params['pool']:
             if volumeType == 'normal':
-                module.fail_json(msg="To create a normal volume, 'pool' parameter must be specified.")
+                module.fail_json(msg="To create a normal volume, the 'pool' parameter must be specified.")
         else:
             try:
                 client.storage_pool_get(module.params['pool'])
             except:
-                module.fail_json(msg="To create a normal volume, 'parent' parameter must be a valid storage pool.")
+                module.fail_json(msg="To create a normal volume, the 'pool' parameter must be a valid storage pool.")
 
     #Parameter interpretation
     deleteChildren = False

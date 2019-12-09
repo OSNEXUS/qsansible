@@ -137,11 +137,11 @@ def main():
 
     # Bailout checks
     if module.params['host'] and module.params['hostgroup']:
-        module.fail_json(msg="Cannot perform operation that has both host and hostgroup as the target.")
+        module.fail_json(msg="Cannot perform operation that has both the 'host' and 'hostgroup' parameters set.")
     if not (module.params['host'] or module.params['hostgroup']):
-        module.fail_json(msg="Cannot perform operation unless atleast one of, 'host' or 'hostgroup' are specified.")
+        module.fail_json(msg="Cannot perform operation unless one of either the 'host' or 'hostgroup' parameters are specified.")
     if module.params['volume'] and module.params['initiators']:
-        module.fail_json(msg="Invalid argument specification. You cannot specify both 'volume' and  'initiators' arguments together.")
+        module.fail_json(msg="Invalid argument specification. You cannot specify both the 'volume' and the 'initiators' arguments together.")
 
     if state == "present":
         # create host or add host initiators

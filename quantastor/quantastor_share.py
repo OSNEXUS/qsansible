@@ -295,13 +295,13 @@ def main():
     if not module.params['parent']:
         if not shareType == 'normal':
             # all non-'normal' share types require 'parent' parameter.
-            module.fail_json(msg="To create a '%s', 'parent' parameter must be specified." % (module.params['shareType']))
+            module.fail_json(msg="To create a '%s', the 'parent' parameter must be specified." % (module.params['shareType']))
     else:
         try:
             client.network_share_get(networkShare=module.params['parent'])
         except Exception as e:
             # all non-'normal' share types require a vaild parent object
-            module.fail_json(msg="To create a(n) '%s', 'parent' parameter must be a valid network share." % (module.params['shareType']))
+            module.fail_json(msg="To create a(n) '%s', the 'parent' parameter must be a valid network share." % (module.params['shareType']))
 
 
     # For create operations:
@@ -309,15 +309,15 @@ def main():
         # normal shares require the 'pool' parameter to be a valid storage pool.
         if not module.params['pool']:
             if shareType == 'normal':
-                module.fail_json(msg="To create a normal share, 'pool' parameter must be specified.")
+                module.fail_json(msg="To create a normal share, the 'pool' parameter must be specified.")
         else:
             try:
                 client.storage_pool_get(module.params['pool'])
             except:
-                module.fail_json(msg="To create a normal share, 'parent' parameter must be a valid storage pool.")
+                module.fail_json(msg="To create a normal share, the 'pool' parameter must be a valid storage pool.")
         # all subshares require the 'subPath' parameter
         if shareType == 'subshare' and not module.params['subPath']:
-            module.fail_json(msg="To create a subshare, 'subPath' parameter must be specified.")
+            module.fail_json(msg="To create a subshare, the 'subPath' parameter must be specified.")
 
     # Parameter interpretation 
     syncPolicy = 0
