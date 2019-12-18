@@ -11,7 +11,7 @@ NOTE: best to do this on a stock ubuntu 16.04 VM as your Ansible controller else
 ## Step 2: clone quantastor ansible module git repository
 
     cd /path/to/dir
-    git clone https://github.com/cagamps/qsansible.git
+    git clone https://github.com/OSNEXUS/qsansible.git
 
 ## Step 3: tell ansible about one of your quantastor test boxes by editing /etc/ansible/hosts and adding a section like shown below:
 
