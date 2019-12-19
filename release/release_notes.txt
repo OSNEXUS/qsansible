@@ -1,0 +1,8 @@
+Release Notes Document for QuantaStor-Ansible Modules
+
+qsansible v.1.0 - compatable with QuantaStor 5.5.0 [Date: 12/19/2019]
+
+  >  Error message changed from "To create a normal share, the 'parent' parameter must be a valid storage pool." -> "To create a normal share, the 'pool' parameter must be a valid storage pool." [ QSTOR-6629 ]
+  >  Host remove operation now allows you to pass the 'flags' parameter allowing you to delete a host that is a member of a host group by passing the force flag. [ QSTOR-6631 ]
+  >  Published Ansible Module and Python client library that use QuantaStor REST API for automation. [ QSTOR-6025 ]
+  >  Running the playbooks to unassign a volume from a host that doesn't exist no longer throws an error. Instead the unassignment task exits with changed=false. [ QSTOR-6630 ]
