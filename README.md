@@ -3,8 +3,15 @@
 ## Step 1: install ansible
 NOTE: best to do this on a stock ubuntu 16.04 VM as your Ansible controller else you may run into package pinning issues
 
+### Ubuntu ###
     sudo apt-get update
     sudo apt-get install ansible git python3-pip
+    pip3 install requests
+    sudo python3 -m pip install quantastor-qsclient
+
+### CentOS ###
+    sudo yum update
+    sudo yum install ansible git python3-pip
     pip3 install requests
     sudo python3 -m pip install quantastor-qsclient
 
@@ -27,10 +34,17 @@ replace above IP with the IP of your QuantaStor appliance or one within a grid a
 
 ## Step 3: copy the QuantaStor ansible module files into place, here I'm using a symbolic link to the source code in my git checkout rather than copying the content NOTE: installation location for 'qs_client.py' may differ on your system.
 
+### Ubuntu ###
     cd /path/to/dir/qsansible
     ln -s /path/to/dir/qsansible/quantastor.py /usr/local/lib/python3.6/dist-packages/ansible/module_utils/.
     ln -s /usr/local/lib/python3.6/dist-packages/quantastor/qs_client.py /usr/local/lib/python3.6/dist-packages/ansible/module_utils/.
     ln -s /path/to/dir/qsansible/quantastor/ /usr/local/lib/python3.6/dist-packages/ansible/modules/storage/
+
+### CentOS ###
+    cd /path/to/dir/qsansible
+    ln -s /path/to/dir/qsansible/quantastor.py /usr/lib/python3.6/site-packages/ansible/module_utils/.
+    ln -s /usr/local/lib/python3.6/site-packages/quantastor/qs_client.py /usr/lib/python3.6/site-packages/ansible/module_utils/.
+    ln -s /path/to/dir/qsansible/quantastor/ /usr/lib/python3.6/site-packages/ansible/modules/storage/
 
 ## Step 4: run a playbook to test the module
 
